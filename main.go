@@ -12,7 +12,8 @@ import (
 )
 
 func main() {
-	cmd := exec.Command("target/scala-3.1.3/libuv-stdin-poll-bug-out")
+	// cmd := exec.Command("target/scala-3.1.3/libuv-stdin-poll-bug-out")
+	cmd := exec.Command("./a.out")
 
 	stdin, err := cmd.StdinPipe()
 	if err != nil {
