@@ -1,13 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <uv.h>
 
 void cb(uv_poll_t *handle, int status, int events) {
   char *line = NULL;
   size_t len = 0;
-  getline(&line, &len, stdin);
-  fprintf(stdout, "GOT LINE: `%s`\n", line);
+
+  fprintf(stdout, " ~ %d / %d ~", status, events);
   fflush(stdout);
+
+  getline(&line, &len, stdin);
+  fprintf(stdout, "GOT LINE (%zu): `%s`\n", len, line);
+  fflush(stdout);
+
+  if (line[1] == 'w') {
+    char *line = NULL;
+    size_t len = 0;
+    getline(&line, &len, stdin);
+    fprintf(stdout, "GOT LINE (%zu): `%s`\n", len, line);
+    fflush(stdout);
+  }
 }
 
 int main() {

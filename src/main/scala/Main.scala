@@ -1,3 +1,4 @@
+import java.nio.charset.StandardCharsets
 import scala.scalanative.unsafe._
 import scala.scalanative.libc.{stdlib, string}
 import scala.scalanative.loop.EventLoop.loop
@@ -9,8 +10,12 @@ object Main {
 
     StdinReader.readLoop { _ =>
       val line = scala.io.StdIn.readLine().trim
-      if (line.size > 0) {
-        println(s"GOT LINE `$line`")
+      println(s"got line `$line`")
+
+      if (line(1) == 'w') {
+        val line = scala.io.StdIn.readLine().trim
+        // if (line.size > 0) {
+        println(s"got line `$line`")
       }
     }
   }
