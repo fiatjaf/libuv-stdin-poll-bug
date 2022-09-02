@@ -48,9 +48,9 @@ func main() {
 		log.Printf("failed to start: %s", err.Error())
 	}
 
-	fmt.Print("send anything to proceed\n")
-	var v string
-	fmt.Scan(&v)
+	// fmt.Print("send anything to proceed\n")
+	// var v string
+	// fmt.Scan(&v)
 
 	fmt.Println("writing 'hello' 4 times to subprocess with intervals of 200ms.")
 	time.Sleep(time.Second * 3)
