@@ -1,4 +1,5 @@
 import java.nio.charset.StandardCharsets
+import scala.util.Try
 import scala.scalanative.unsafe._
 import scala.scalanative.libc.{stdlib, string}
 import scala.scalanative.loop.EventLoop.loop
@@ -9,13 +10,16 @@ object Main {
     println("STARTING")
 
     StdinReader.readLoop { _ =>
-      val line = scala.io.StdIn.readLine().trim
-      println(s"got line `$line`")
+      var lastChar: Try[Int] = Try { 0 }
+      while (lastChar.isSuccess) {
+        lastChar = Try(scala.Console.in.read())
+        lastChar.foreach { char =>
+          println(
+            s"got char `$char`: ${new String(Array(char.toByte), StandardCharsets.UTF_8)}"
+          )
+        }
 
-      if (line(1) == 'w') {
-        val line = scala.io.StdIn.readLine().trim
-        // if (line.size > 0) {
-        println(s"got line `$line`")
+        if (lastChar.isFailure) println(s"WHAT $lastChar")
       }
     }
   }
